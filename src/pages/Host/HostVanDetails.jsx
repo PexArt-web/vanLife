@@ -1,27 +1,7 @@
-import { useEffect, useState } from "react";
-import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
 
 const HostVanDetails = () => {
-  const { id } = useParams();
-  const [data, setData] = useState("");
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/host/vans/" + id);
-        const data = await response.json();
-        setData(data.vans[0]);
-        console.log(data.vans[0].description, "details");
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  if (!data) {
-    return <div>Loading...</div>;
-  }
-
+  const data = useLoaderData();
   return (
     <section>
       <Link to=".." relative="path" className="back-button">
@@ -42,7 +22,7 @@ const HostVanDetails = () => {
           <NavLink to={"pricing"}>Pricing</NavLink>
           <NavLink to={"photos"}>Photos</NavLink>
         </nav>
-        <Outlet  context={{data}}/>
+        <Outlet context={{ data }} />
       </div>
     </section>
   );

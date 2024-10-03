@@ -1,9 +1,11 @@
+import { useLoaderData } from "react-router-dom"
 
 
 const Income = () => {
+  const element = useLoaderData()
   return (
     <div>
-      <h1>This is the income routes</h1>
+   {element}
     </div>
   )
 }
