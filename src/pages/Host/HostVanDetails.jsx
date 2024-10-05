@@ -1,13 +1,11 @@
-import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
+import { Suspense } from "react";
+import { Await, Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
 
 const HostVanDetails = () => {
-  const data = useLoaderData();
-  return (
-    <section>
-      <Link to=".." relative="path" className="back-button">
-        &larr; <span>Back to all vans</span>
-      </Link>
-
+  const loaderData = useLoaderData();
+  console.log(loaderData, "data");
+  const renderElement = (data) => {
+    return (
       <div className="host-van-detail-layout-container">
         <div className="host-van-detail">
           <img src={data.imageUrl} />
@@ -24,6 +22,17 @@ const HostVanDetails = () => {
         </nav>
         <Outlet context={{ data }} />
       </div>
+    );
+  };
+  return (
+    <section>
+      <Link to=".." relative="path" className="back-button">
+        &larr; <span>Back to all vans</span>
+      </Link>
+
+      <Suspense fallback={<h2>Loading</h2>}>
+        <Await resolve={loaderData.hostVansDetails}>{renderElement}</Await>
+      </Suspense>
     </section>
   );
 };

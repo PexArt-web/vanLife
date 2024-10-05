@@ -27,9 +27,12 @@ import   LoginLoader  from "./Loaders/LoginLoader";
 import  Error  from './components/Error'
 import { loginActon } from "./actions/action";
 
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
+      <>
+      
       <Route path="/" element={<RootLayout />} errorElement={<Error/>}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} loader = {async({request})=> requireAuth(request) } />
@@ -37,7 +40,7 @@ function App() {
         <Route path="vans" element={<Vans />} loader={vansLoader} />
         <Route path="vans/:id" element={<VanDetails />} loader = {vanDetails} />
         <Route path="host" element={<HostLayout />}>
-          <Route index element={<Dashboard />} loader = { async({request})=> await requireAuth(request)} 
+          <Route index element={<Dashboard />} loader = {hostVans} 
           />
           <Route path="vans" element={<Hostvans />} loader = {hostVans} />
           <Route path="vans/:id" element={<HostVanDetails />} loader = {hostVansId}>
@@ -50,6 +53,7 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
+          </>
     )
   );
   return (
