@@ -8,7 +8,6 @@ const Error = () => {
   return (
     <div>
        <h1>Error: {error.message}</h1>
-       {/* <h1>Errorlens: {error}</h1> */}
        <pre>{error.status}- {error.statusText}</pre>
        <pre>{JSON.stringify(error, null, 2)}</pre>
     </div>
