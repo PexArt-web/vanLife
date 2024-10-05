@@ -12,7 +12,9 @@ const Login = () => {
     <div className="login-container">
       <h1>Sign in to your account</h1>
       {message && <h2 className="red">{message}</h2>}
-      {error && <h2 className="red">{error.message}</h2>}
+      {message && <h3>` Your Demo Log in Info :
+        Email: b@b.com, password: p123 `</h3>}
+      {error && <h4 className="red">{error.message}</h4>}
       <Form method="post" className="login-form" replace>
         <input name="email" type="email" placeholder="Email address" />
         <input name="password" type="password" placeholder="Password" />
